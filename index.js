@@ -32,11 +32,16 @@ let manageRecipes = async () => {
     await Recipe.create(bacalhauBras);
    
     let arrayOfRecipes = await Recipe.insertMany(data);
-    console.log(arrayOfRecipes);
+    for (let i = 0; i< arrayOfRecipes.length; i++) {
+      console.log(arrayOfRecipes[i].title);
+    }
+    
 
     await Recipe.findOneAndUpdate({title:"Rigatoni alla Genovese"}, {duration:100});
+    console.log("Duration updated!")
 
     await Recipe.deleteOne({title: "Carrot Cake"});
+    console.log("Carrot Cake removed!")
 
     mongoose.connection.close(function() {console.log('Mongoose connection closed')});
 
